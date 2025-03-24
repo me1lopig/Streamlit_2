@@ -30,9 +30,9 @@ def plot_mohrs_circles(sigma_1, sigma_2, sigma_3):
     # Set the limits and labels
     ax.set_xlim(min_center, max_center)
     ax.set_ylim(-max_radius * 1.1, max_radius * 1.1)
-    ax.set_xlabel('Normal Stress (σ)')
-    ax.set_ylabel('Shear Stress (τ)')
-    ax.set_title("Mohr's Circles for Three Principal Stresses")
+    ax.set_xlabel('Tensión Normal (σ)')
+    ax.set_ylabel('Tensión Cortante (τ)')
+    ax.set_title("Círculo de Mohr")
     ax.grid(True)
 
     # Ensure equal scaling of x and y axes
@@ -43,12 +43,12 @@ def plot_mohrs_circles(sigma_1, sigma_2, sigma_3):
 
 def main():
     # Streamlit app
-    st.title("Mohr's Circles Plotter")
+    st.title("Representación del círculo de Mohr")
 
     # Numeric input fields for principal stresses
-    sigma_1 = st.number_input("Maximum Principal Stress (σ₁)", value=100.0)
-    sigma_2 = st.number_input("Intermediate Principal Stress (σ₂)", value=75.0)
-    sigma_3 = st.number_input("Minimum Principal Stress (σ₃)", value=50.0)
+    sigma_1 = st.number_input("Tensión Principal (σ₁)", value=100.0)
+    sigma_2 = st.number_input("Tensión Principal (σ₂)", value=75.0)
+    sigma_3 = st.number_input("Tension Principal (σ₃)", value=50.0)
 
     # Plot the circles
     plot_mohrs_circles(sigma_1, sigma_2, sigma_3)
