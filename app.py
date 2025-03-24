@@ -13,19 +13,22 @@ def plot_mohrs_circles(sigma_1, sigma_2, sigma_3):
         circle = plt.Circle((center, 0), radius, color=color, fill=False, linestyle='-', linewidth=2)
         ax.add_artist(circle)
         ax.plot([sigma_a, sigma_b], [0, 0], 'ro')  # Principal stresses
+        return center, radius
 
-    # Plot circles
-    plot_circle(sigma_1, sigma_3, 'b')  # Circle for sigma_1 and sigma_3
-    plot_circle(sigma_1, sigma_2, 'g')  # Circle for sigma_1 and sigma_2
-    plot_circle(sigma_2, sigma_3, 'r')  # Circle for sigma_2 and sigma_3
+    # Plot circles and get their centers and radii
+    center_13, radius_13 = plot_circle(sigma_1, sigma_3, 'b')
+    center_12, radius_12 = plot_circle(sigma_1, sigma_2, 'g')
+    center_23, radius_23 = plot_circle(sigma_2, sigma_3, 'r')
 
-    # Calculate limits for the axes
-    max_sigma = max(sigma_1, sigma_2, sigma_3)
-    min_sigma = min(sigma_1, sigma_2, sigma_3)
-    max_radius = max(abs(max_sigma - min_sigma) / 2, abs(max_sigma), abs(min_sigma))
+    # Calculate the overall bounds for the axes
+    all_centers = [center_13, center_12, center_23]
+    all_radii = [radius_13, radius_12, radius_23]
+    max_radius = max(all_radii)
+    min_center = min(all_centers) - max_radius
+    max_center = max(all_centers) + max_radius
 
     # Set the limits and labels
-    ax.set_xlim(min_sigma - max_radius * 0.1, max_sigma + max_radius * 0.1)
+    ax.set_xlim(min_center, max_center)
     ax.set_ylim(-max_radius * 1.1, max_radius * 1.1)
     ax.set_xlabel('Normal Stress (σ)')
     ax.set_ylabel('Shear Stress (τ)')
