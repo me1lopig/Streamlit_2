@@ -19,16 +19,21 @@ def plot_mohrs_circles(sigma_1, sigma_2, sigma_3):
     plot_circle(sigma_1, sigma_2, 'g')  # Circle for sigma_1 and sigma_2
     plot_circle(sigma_2, sigma_3, 'r')  # Circle for sigma_2 and sigma_3
 
-    # Set the limits and labels
+    # Calculate limits for the axes
     max_sigma = max(sigma_1, sigma_2, sigma_3)
     min_sigma = min(sigma_1, sigma_2, sigma_3)
-    max_radius = max(abs(max_sigma), abs(min_sigma))
+    max_radius = max(abs(max_sigma - min_sigma) / 2, abs(max_sigma), abs(min_sigma))
+
+    # Set the limits and labels
     ax.set_xlim(min_sigma - max_radius * 0.1, max_sigma + max_radius * 0.1)
-    ax.set_ylim(-max_radius * 0.6, max_radius * 0.6)
+    ax.set_ylim(-max_radius * 1.1, max_radius * 1.1)
     ax.set_xlabel('Normal Stress (σ)')
     ax.set_ylabel('Shear Stress (τ)')
     ax.set_title("Mohr's Circles for Three Principal Stresses")
     ax.grid(True)
+
+    # Ensure equal scaling of x and y axes
+    ax.set_aspect('equal', adjustable='box')
 
     # Display the plot
     st.pyplot(fig)
