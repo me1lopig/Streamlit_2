@@ -1,3 +1,5 @@
+# librerias
+
 import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
@@ -37,10 +39,10 @@ def main():
     # Streamlit app
     st.title("Mohr's Circles Plotter")
 
-    # Numeric input fields for principal stresses
-    sigma_1 = st.number_input("Maximum Principal Stress (σ₁)", min_value=0.0, value=100.0)
-    sigma_2 = st.number_input("Intermediate Principal Stress (σ₂)", min_value=0.0, value=75.0)
-    sigma_3 = st.number_input("Minimum Principal Stress (σ₃)", min_value=0.0, value=50.0)
+    # Slider inputs for principal stresses
+    sigma_1 = st.slider("Maximum Principal Stress (σ₁)", 0.0, 200.0, 100.0)
+    sigma_2 = st.slider("Intermediate Principal Stress (σ₂)", 0.0, 200.0, 75.0)
+    sigma_3 = st.slider("Minimum Principal Stress (σ₃)", 0.0, 200.0, 50.0)
 
     # Plot the circles
     plot_mohrs_circles(sigma_1, sigma_2, sigma_3)
