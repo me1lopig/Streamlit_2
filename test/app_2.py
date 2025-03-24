@@ -3,20 +3,18 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-
-  # Plot Mohr's circles for each pair of principal stresses
-def plot_circle(sigma_a, sigma_b, color):
-    center = (sigma_a + sigma_b) / 2
-    radius = abs(sigma_a - sigma_b) / 2
-    circle = plt.Circle((center, 0), radius, color=color, fill=False, linestyle='-', linewidth=2)
-    ax.add_artist(circle)
-    ax.plot([sigma_a, sigma_b], [0, 0], 'ro')  # Principal stresses
-    return center, radius
-
-
 def plot_mohrs_circles(sigma_1, sigma_2, sigma_3):
     # Create a figure and axis
     fig, ax = plt.subplots()
+
+    # Plot Mohr's circles for each pair of principal stresses
+    def plot_circle(sigma_a, sigma_b, color):
+        center = (sigma_a + sigma_b) / 2
+        radius = abs(sigma_a - sigma_b) / 2
+        circle = plt.Circle((center, 0), radius, color=color, fill=False, linestyle='-', linewidth=2)
+        ax.add_artist(circle)
+        ax.plot([sigma_a, sigma_b], [0, 0], 'ro')  # Principal stresses
+        return center, radius
 
     # Plot circles and get their centers and radii
     center_13, radius_13 = plot_circle(sigma_1, sigma_3, 'b')
