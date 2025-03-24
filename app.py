@@ -3,8 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-
-  # Plot Mohr's circles for each pair of principal stresses
+# Plot Mohr's circles for each pair of principal stresses
 def plot_circle(sigma_a, sigma_b, color):
     center = (sigma_a + sigma_b) / 2
     radius = abs(sigma_a - sigma_b) / 2
