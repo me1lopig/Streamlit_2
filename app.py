@@ -9,7 +9,7 @@ def plot_mohrs_circles(sigma_1, sigma_2, sigma_3):
     # Plot Mohr's circles for each pair of principal stresses
     def plot_circle(sigma_a, sigma_b, color):
         center = (sigma_a + sigma_b) / 2
-        radius = (sigma_a - sigma_b) / 2
+        radius = abs(sigma_a - sigma_b) / 2
         circle = plt.Circle((center, 0), radius, color=color, fill=False, linestyle='-', linewidth=2)
         ax.add_artist(circle)
         ax.plot([sigma_a, sigma_b], [0, 0], 'ro')  # Principal stresses
@@ -22,7 +22,7 @@ def plot_mohrs_circles(sigma_1, sigma_2, sigma_3):
     # Set the limits and labels
     max_sigma = max(sigma_1, sigma_2, sigma_3)
     min_sigma = min(sigma_1, sigma_2, sigma_3)
-    max_radius = max_sigma - min_sigma
+    max_radius = max(abs(max_sigma), abs(min_sigma))
     ax.set_xlim(min_sigma - max_radius * 0.1, max_sigma + max_radius * 0.1)
     ax.set_ylim(-max_radius * 0.6, max_radius * 0.6)
     ax.set_xlabel('Normal Stress (σ)')
@@ -38,13 +38,12 @@ def main():
     st.title("Mohr's Circles Plotter")
 
     # Numeric input fields for principal stresses
-    sigma_1 = st.number_input("Maximum Principal Stress (σ₁)", min_value=0.0, value=100.0)
-    sigma_2 = st.number_input("Intermediate Principal Stress (σ₂)", min_value=0.0, value=75.0)
-    sigma_3 = st.number_input("Minimum Principal Stress (σ₃)", min_value=0.0, value=50.0)
+    sigma_1 = st.number_input("Maximum Principal Stress (σ₁)", value=100.0)
+    sigma_2 = st.number_input("Intermediate Principal Stress (σ₂)", value=75.0)
+    sigma_3 = st.number_input("Minimum Principal Stress (σ₃)", value=50.0)
 
     # Plot the circles
     plot_mohrs_circles(sigma_1, sigma_2, sigma_3)
 
 if __name__ == "__main__":
     main()
-
