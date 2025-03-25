@@ -4,8 +4,6 @@ import numpy as np
 
 
 
-
-
 def plot_mohrs_circles(sigma_1, sigma_2, sigma_3):
     # Create a figure and axis
     fig, ax = plt.subplots()
